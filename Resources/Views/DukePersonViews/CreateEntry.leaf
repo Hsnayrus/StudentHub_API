@@ -1,0 +1,20 @@
+#extend("base")
+
+<body>
+    <form method="post">
+        <p>Firstname: <input type="text" name="firstname"></p>
+        <p>Lastname: <input type="text" name="lastname"></p>
+        <p>NetID: <input type="text" name="netid"></p>
+        <p>Place of Origin: <input type="text" name="wherefrom"></p>
+        <p>Gender: <input type="text" name="gender"></p>
+        <p>Degree: <input type="text" name="degree"></p>
+        <p>Role: <input type="text" name="role"></p>
+        <p>Team: <input type="text" name="team"></p>
+        <p>Hobbies: <input type="text" name="hobbies"></p>
+        <p>Languages: <input type="text" name="languages"></p>
+        <p>Department: <input type="text" name="department"></p>
+        <p>Email: <input type="text" name="email"></p>
+        <p>Picture: <input type="text" name="picture"></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>

@@ -1,0 +1,7 @@
+#extend("base")
+
+<ul>
+    #for(person in dukePeople):
+    <li>#(person)</li>
+    #endfor
+</ul>

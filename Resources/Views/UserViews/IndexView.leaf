@@ -1,0 +1,28 @@
+#extend("base")
+
+<head>
+    <link rel="stylesheet" href="assets/IndexStyles.css">
+</head>
+<div class="section-1-container section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col section-1 section-description">
+                <h1>Login</h1>
+                <!-- <div class="divider-1"><span style="color:rgb(107, 164, 214)"></span></div>
+                <p>A tutorial on how to align a "div" element vertically</p> -->
+            </div>
+        </div>
+        <div class="row">
+            <div
+                class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
+                <div class="div-to-align">
+                    <form method="post" action="users/">
+                        <p>Username: <input type="text" name="username" class="form-control"></p>
+                        <p>Password: <input type="password" name="password" class="form-control"></p>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
