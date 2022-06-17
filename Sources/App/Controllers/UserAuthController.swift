@@ -11,18 +11,18 @@ import Vapor
 struct UserAuthController: RouteCollection{
     func boot(routes: RoutesBuilder) throws {
         let users = routes.grouped("user")
-//        users.get(use: index)
         users.group("create"){ user in
             user.post(use: create)
+        }
+        users.group("all"){ user in
+            user.get(use: index)
         }
     }
     
 //    //MARK: Index -> Render a form that enables creating a new user.
-//    func index(req: Request) throws -> EventLoopFuture<View>{
-//        return UserAuth.query(on: req.db).all().flatMap{users in
-//            return req.view.render("UserViews/IndexView", ["users": users])
-//        }
-//    }
+    func index(req: Request) throws -> EventLoopFuture<[UserAuth]>{
+        return UserAuth.query(on: req.db).all()
+    }
     
     //MARK: Create -> Decode the data received from the index function
     func create(req: Request) async throws -> HTTPStatus{
