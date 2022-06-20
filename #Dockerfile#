@@ -24,6 +24,7 @@ COPY . .
 
 # Build everything, with optimizations
 RUN ulimit -n 65536
+RUN 
 RUN swift build -c release --static-swift-stdlib
 
 # Switch to the staging area
