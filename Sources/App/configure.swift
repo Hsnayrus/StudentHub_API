@@ -13,7 +13,7 @@ public func configure(_ app: Application) throws {
         port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? PostgresConfiguration.ianaPortNumber,
         username: Environment.get("DATABASE_USERNAME") ?? "postgres",
         password: Environment.get("DATABASE_PASSWORD") ?? "password",
-        database: Environment.get("DATABASE_NAME") ?? "ece564server_vapor"
+        database: Environment.get("DATABASE_NAME") ?? "ECE564Server_Vapor"
     ), as: .psql)
 
     app.migrations.add(CreateUserAuth())

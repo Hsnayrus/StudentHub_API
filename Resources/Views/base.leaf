@@ -1,21 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
+<style>
+    .menu-container {
+        background: #2dc8f3;
+        background: -moz-linear-gradient(-45deg, #2dc8f3 0%, #1497e2 100%);
+        background: -webkit-linear-gradient(-45deg, #2dc8f3 0%, #1497e2 100%);
+        background: linear-gradient(135deg, #2dc8f3 0%, #1497e2 100%);
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .wrapper {
+        max-width: calc(320px *4);
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .wrapper {
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .title h1 {
+        color: white;
+    }
+
+    .title .login-button {
+        background: none;
+        float: right;
+        color: white;
+        font-size: 25px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        width: 40px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
-    <title>ECE 564 Server</title>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
-
-<body class="h-100">
-    <nav class="navbar navbar-default" style="background-color: #d8fce6 ; border-radius: 5px">
-        <div class="container-fluid">
-            <h1 style="font-family:'Trebuchet MS';text-align: center;">ECE 564 Server</h1>
+    <div class="menu-container">
+        <div class="wrapper">
+            <div class="title">
+                <h1 style="display:inline">📱ECE564 - Duke People Showroom🍎</h1>
+            </div>
         </div>
-    </nav>
-
-</body>
+    </div>
+</head>
 
 </html>
