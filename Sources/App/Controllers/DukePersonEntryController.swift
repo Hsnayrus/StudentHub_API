@@ -142,7 +142,7 @@ struct DukePersonEntryController: RouteCollection{
         return DukePersonEntry.query(on: req.db).all()
     }
     
-    func deleteEntry(req: Request)g throws -> EventLoopFuture<HTTPStatus>{
+    func deleteEntry(req: Request) throws -> EventLoopFuture<HTTPStatus>{
         DukePersonEntry.find(req.parameters.get("songID"), on: req.db)
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
