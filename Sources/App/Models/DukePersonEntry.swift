@@ -11,7 +11,7 @@ import Vapor
 final class DukePersonEntry: Model, Content{
     static let schema: String = "ece564server_dukeperson_entry"
     
-    @ID(custom: "id", generatedBy: .user)
+    @ID(custom: "id", generatedBy: .random)
     var id: String?
     
     @Field(key: "netid")

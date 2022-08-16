@@ -9,7 +9,7 @@ import Fluent
 import FluentPostgresDriver
 import Vapor
 
-struct CreateDukePersonEntry: AsyncMigration{
+struct DukePersonEntryMigrations: AsyncMigration{
     /*MARK: Note
      This function is never used since we cannot create
      primary keys of string type.
@@ -18,7 +18,7 @@ struct CreateDukePersonEntry: AsyncMigration{
      */
     func prepare(on database: Database) async throws {
         try await database.schema("ece564server_dukeperson_entry")
-            .id()
+            .field("id", .string, .identifier(auto: false))
             .field("netid", .string, .required)
             .field("firstname", .string, .required)
             .field("lastname" ,.string, .required)

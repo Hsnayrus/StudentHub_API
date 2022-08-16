@@ -16,8 +16,8 @@ public func configure(_ app: Application) throws {
         database: Environment.get("DATABASE_NAME") ?? "ECE564Server_Vapor"
     ), as: .psql)
 
-    app.migrations.add(CreateUserAuth())
-    app.migrations.add(CreateDukePersonEntry())
+    app.migrations.add(UserAuthMigrations())
+    app.migrations.add(DukePersonEntryMigrations())
 
     app.views.use(.leaf)
     app.routes.defaultMaxBodySize = "10mb"
