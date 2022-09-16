@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-enum UserType: String, CodableC{
+enum UserType: String, Codable{
     case Professor
     case TA
     case Student
