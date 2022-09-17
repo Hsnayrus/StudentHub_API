@@ -101,14 +101,40 @@ struct DukePersonEntryController: RouteCollection{
         }
     }
     
-    func getAllEntries(req: Request) throws -> EventLoopFuture<[DukePersonEntry]>{
-        return DukePersonEntry.query(on: req.db).all()
+    func getAllEntries(req: Request) async throws -> [DukePersonEntry]{
+        let authHeaders = req.headers.basicAuthorization
+        
+        if let authHeaders = authHeaders{
+            
+            //Checking if these credentials match with ones existing in the database
+            guard (try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first()) != nil else{
+                return []
+            }
+            
+            let allUsers = try await DukePersonEntry.query(on: req.db).all()
+            return allUsers
+            
+        }
+        else{
+            return []
+        }
     }
     
     func deleteEntry(req: Request) async throws -> HTTPStatus{
+        guard let authHeaders = req.headers.basicAuthorization else{
+            return HTTPStatus(statusCode: 404, reasonPhrase: "No credentials Provided")
+        }
         guard let id = req.parameters.get("id") else {
             return HTTPStatus(statusCode: 400, reasonPhrase: "Invalid ID provided")
         }
+        if id != authHeaders.username{
+            return HTTPStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry")
+        }
+        
+        guard let authUserEntry = UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password) else {
+            return HTTPStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists")
+        }
+        
         guard let entry = try await DukePersonEntry.find(id, on: req.db) else{
             return HTTPStatus(statusCode: 400, reasonPhrase: "ID doesn't exist")
         }
