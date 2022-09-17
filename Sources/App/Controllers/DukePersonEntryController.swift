@@ -131,11 +131,11 @@ struct DukePersonEntryController: RouteCollection{
             return HTTPStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry")
         }
         
-        guard let authUserEntry = UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password) else {
+        guard let authUserEntry = try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first() else {
             return HTTPStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists")
         }
         
-        guard let entry = try await DukePersonEntry.find(id, on: req.db) else{
+        guard let entry = try await DukePersonEntry.find(authUserEntry.username, on: req.db) else{
             return HTTPStatus(statusCode: 400, reasonPhrase: "ID doesn't exist")
         }
         try await entry.delete(on: req.db)
