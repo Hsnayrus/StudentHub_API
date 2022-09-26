@@ -19,7 +19,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(UserAuthMigrations())
     app.migrations.add(DukePersonEntryMigrations())
 
-    app.views.use(.leaf)
+    app.views.use(.plaintext)
     app.routes.defaultMaxBodySize = "10mb"
     
 

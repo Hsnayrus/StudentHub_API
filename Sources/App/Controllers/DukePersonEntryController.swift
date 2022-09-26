@@ -37,7 +37,9 @@ struct DukePersonEntryController: RouteCollection{
                 let color = hexString.suffix(6).uppercased()
                 allPeople.append(DukePersonEntryView(dukePerson: person, color: color))
             }
-            return req.view.render("DukePersonViews/DukePeopleIndex.leaf", ["dukePeople": allPeople])
+            
+            return req.leaf.render("DukePersonViews/DukePeopleIndex.leaf", ["dukePeople": allPeople])
+//            return req.view.render("DukePersonViews/DukePeopleIndex.leaf", ["dukePeople": allPeople])
         }
     }
     
