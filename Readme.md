@@ -106,13 +106,13 @@ All the following routes require a basicAuthorization HTTP header, where a valid
         {
             "firstname": "John",
             "lastname": "Doe", 
-            "netid": "jd122222223",
+            "netid": "blabla1",
             "wherefrom": "Earth",
             "gender": "Male",
             "role": "Student",
             "degree": "MS",
             "team": "Duke",
-            "hobbies": ["writing", "code"],
+            "hobbies": ["Coding"],
             "languages": ["C++", "Swift"],
             "department": "ECE",
             "email": "jjj@jjj.edu",
@@ -131,6 +131,33 @@ All the following routes require a basicAuthorization HTTP header, where a valid
 
 ***
 
-+ `DELETE` /entries/<u>id</u>:
++ `DELETE` /entries/<u>netid</u>:
 
-    This route is used to delete entries from the DukePersonEntry Table. <u>id</u>  is the ID associated with the DukePersonEntry. As usual, credentials are required and a person can only delete their entry. 
+    This route is used to delete entries from the DukePersonEntry Table. <u>id</u>  is the NetID associated with the DukePersonEntry. As usual, credentials are required and a person can only delete their entry. 
+
+***
+
++ `PUT` /entries/<u>netid</u>:
+    
+    This route is used to update a particular entry whose NetID is <u>netid</u>. So if my NetID is blabla1 and I wanted to change my hobbies from ["Coding"] to ["Coding", "Hiking"], my URI would be /entries/blabla1, I would enter the `Basic Authorization` header in the request, add a `Content-Type = application/json` header in the request and fill the body with: 
+    ```
+    {
+            "firstname": "John",
+            "lastname": "Doe", 
+            "netid": "blabla1",
+            "wherefrom": "Earth",
+            "gender": "Male",
+            "role": "Student",
+            "degree": "MS",
+            "team": "Duke",
+            "hobbies": ["Coding", "Hiking"],
+            "languages": ["C++", "Swift"],
+            "department": "ECE",
+            "email": "jjj@jjj.edu",
+            "picture": "here is where the base 64 encoded string would go"
+        }
+    ```
+
++ `GET` /entries/<u>netid</u>:
+    
+    This route is used to retrieve a particular entry whose NetID is <u>netid</u>. So if my NetID is blabla1, my URI would be /entries/blabla1 and I would send a GET request, with `Basic Authorization`

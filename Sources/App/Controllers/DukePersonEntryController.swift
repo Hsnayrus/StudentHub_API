@@ -7,6 +7,7 @@
 
 import Fluent
 import Vapor
+import AppKit
 
 struct DukePersonEntryController: RouteCollection{
     func boot(routes: RoutesBuilder) throws {
@@ -18,7 +19,9 @@ struct DukePersonEntryController: RouteCollection{
         dukePeople.group("all"){dukePerson in
             dukePerson.get(use: getAllEntries)
         }
-        dukePeople.group(":id"){dukePerson in
+        dukePeople.group(":netid"){dukePerson in
+            dukePerson.get(use: getEntryById)
+            dukePerson.put(use: updateEntryById)
             dukePerson.delete(use: deleteEntry)
         }
     }
@@ -83,21 +86,7 @@ struct DukePersonEntryController: RouteCollection{
             return HTTPStatus(statusCode: 200, reasonPhrase: "Created a new DukePerson")
         }
         else{
-            let foundPerson = values.first!
-            foundPerson.firstname = dukePerson.firstname
-            foundPerson.lastname = dukePerson.lastname
-            foundPerson.wherefrom = dukePerson.wherefrom
-            foundPerson.gender = dukePerson.gender
-            foundPerson.role = dukePerson.role
-            foundPerson.degree = dukePerson.degree
-            foundPerson.team = dukePerson.team
-            foundPerson.hobbies = dukePerson.hobbies
-            foundPerson.languages = dukePerson.languages
-            foundPerson.department = dukePerson.department
-            foundPerson.email = dukePerson.email
-            foundPerson.picture = dukePerson.picture
-            try await foundPerson.update(on: req.db)
-            return HTTPStatus(statusCode: 200, reasonPhrase: "Updated existing entry for \(dukePerson.netid)")
+            return HTTPStatus(statusCode: 400, reasonPhrase: "Entry already exists")
         }
     }
     
@@ -124,10 +113,10 @@ struct DukePersonEntryController: RouteCollection{
         guard let authHeaders = req.headers.basicAuthorization else{
             return HTTPStatus(statusCode: 404, reasonPhrase: "No credentials Provided")
         }
-        guard let id = req.parameters.get("id") else {
+        guard let netid = req.parameters.get("netid") else {
             return HTTPStatus(statusCode: 400, reasonPhrase: "Invalid ID provided")
         }
-        if id != authHeaders.username{
+        if netid != authHeaders.username{
             return HTTPStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry")
         }
         
@@ -135,7 +124,7 @@ struct DukePersonEntryController: RouteCollection{
             return HTTPStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists")
         }
         
-        guard let entry = try await DukePersonEntry.find(authUserEntry.username, on: req.db) else{
+        guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == authUserEntry.username).first() else{
             return HTTPStatus(statusCode: 400, reasonPhrase: "ID doesn't exist")
         }
         try await entry.delete(on: req.db)
@@ -146,6 +135,65 @@ struct DukePersonEntryController: RouteCollection{
 //            .transform(to: .ok)
     }
     
+    func getEntryById(req: Request) async throws -> DukePersonEntry{
+        guard let authHeaders = req.headers.basicAuthorization else{
+            throw Abort(HTTPResponseStatus(statusCode: 404, reasonPhrase: "No credentials Provided"))
+        }
+        guard let id = req.parameters.get("netid") else {
+            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Invalid NetID provided"))
+        }
+        if id != authHeaders.username{
+            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry"))
+        }
+        
+        guard let authUserEntry = try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first() else {
+            throw Abort(HTTPResponseStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists"))
+        }
+        
+        guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == authUserEntry.username).first() else{
+            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "NetID doesn't exist"))
+        }
+        
+        return entry
+    }
+    
+    func updateEntryById(req: Request)async throws -> HTTPStatus{
+        guard let authHeaders = req.headers.basicAuthorization else{
+            return HTTPStatus(statusCode: 404, reasonPhrase: "No credentials Provided")
+        }
+        guard let netid = req.parameters.get("netid") else {
+            return HTTPStatus(statusCode: 400, reasonPhrase: "Invalid ID provided")
+        }
+        if netid != authHeaders.username{
+            return HTTPStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry")
+        }
+        
+        guard let authUserEntry = try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first() else {
+            return HTTPStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists")
+        }
+        
+        guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == authUserEntry.username).first() else{
+            return HTTPStatus(statusCode: 400, reasonPhrase: "ID doesn't exist")
+        }
+        
+        let newDetails = try req.content.decode(DukePersonEntry.self)
+        
+        entry.firstname  = newDetails.firstname
+        entry.lastname   = newDetails.lastname
+        entry.wherefrom  = newDetails.wherefrom
+        entry.gender     = newDetails.gender
+        entry.role       = newDetails.role
+        entry.degree     = newDetails.degree
+        entry.team       = newDetails.team
+        entry.hobbies    = newDetails.hobbies
+        entry.languages  = newDetails.languages
+        entry.department = newDetails.department
+        entry.email      = newDetails.email
+        entry.picture    = newDetails.picture
+        try await entry.update(on: req.db)
+        return HTTPStatus(statusCode: 200, reasonPhrase: "Updated existing entry for \(newDetails.netid)")
+        
+    }
 }
 
 
