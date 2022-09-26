@@ -37,7 +37,7 @@ struct DukePersonEntryController: RouteCollection{
                 let color = hexString.suffix(6).uppercased()
                 allPeople.append(DukePersonEntryView(dukePerson: person, color: color))
             }
-            return req.view.render("DukePersonViews/DukePeopleIndex", ["dukePeople": allPeople])
+            return req.view.render("DukePersonViews/DukePeopleIndex.leaf", ["dukePeople": allPeople])
         }
     }
     
@@ -97,7 +97,7 @@ struct DukePersonEntryController: RouteCollection{
             
             //Checking if these credentials match with ones existing in the database
             guard (try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first()) != nil else{
-                return []
+                throw Abort(HTTPResponseStatus(statusCode: 401, reasonPhrase: "User does not exist"))
             }
             
             let allUsers = try await DukePersonEntry.query(on: req.db).all()
@@ -105,7 +105,7 @@ struct DukePersonEntryController: RouteCollection{
             
         }
         else{
-            return []
+            throw Abort(HTTPResponseStatus(statusCode: 401, reasonPhrase: "No credentials provided"))
         }
     }
     
@@ -137,17 +137,17 @@ struct DukePersonEntryController: RouteCollection{
     
     func getEntryById(req: Request) async throws -> DukePersonEntry{
         guard let authHeaders = req.headers.basicAuthorization else{
-            throw Abort(HTTPResponseStatus(statusCode: 404, reasonPhrase: "No credentials Provided"))
+            throw Abort(HTTPResponseStatus(statusCode: 401, reasonPhrase: "No credentials Provided"))
         }
         guard let id = req.parameters.get("netid") else {
             throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Invalid NetID provided"))
         }
         if id != authHeaders.username{
-            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Can only delete your own entry"))
+            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Can only retrieve your own entry"))
         }
         
         guard let authUserEntry = try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first() else {
-            throw Abort(HTTPResponseStatus(statusCode: 404, reasonPhrase: "No entry for these credentials exists"))
+            throw Abort(HTTPResponseStatus(statusCode: 401, reasonPhrase: "No entry for these credentials exists"))
         }
         
         guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == authUserEntry.username).first() else{
