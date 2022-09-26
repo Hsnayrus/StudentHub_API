@@ -7,7 +7,6 @@
 
 import Fluent
 import Vapor
-import AppKit
 
 struct DukePersonEntryController: RouteCollection{
     func boot(routes: RoutesBuilder) throws {
