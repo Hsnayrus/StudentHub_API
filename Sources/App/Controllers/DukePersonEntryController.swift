@@ -7,7 +7,6 @@
 
 import Fluent
 import Vapor
-import AppKit
 
 struct DukePersonEntryController: RouteCollection{
     func boot(routes: RoutesBuilder) throws {
@@ -144,15 +143,12 @@ struct DukePersonEntryController: RouteCollection{
         guard let id = req.parameters.get("netid") else {
             throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Invalid NetID provided"))
         }
-        if id != authHeaders.username{
-            throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "Can only retrieve your own entry"))
-        }
         
         guard let authUserEntry = try await UserAuth.query(on: req.db).filter(\.$username == authHeaders.username).filter(\.$password == authHeaders.password).first() else {
             throw Abort(HTTPResponseStatus(statusCode: 401, reasonPhrase: "No entry for these credentials exists"))
         }
         
-        guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == authUserEntry.username).first() else{
+        guard let entry = try await DukePersonEntry.query(on: req.db).filter(\.$netid == id).first() else{
             throw Abort(HTTPResponseStatus(statusCode: 400, reasonPhrase: "NetID doesn't exist"))
         }
         
