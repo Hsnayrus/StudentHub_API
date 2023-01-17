@@ -107,11 +107,22 @@
                         <li class="key">"id": <span class="value"> "#(person.id)"</span></li>
                         <li class="key">"wherefrom": <span class="value"> "#(person.wherefrom)"</span></li>
                         <li class="key">"degree": <span class="value"> "#(person.degree)"</span></li>
-                        <li class="key">"gender": <span class="value"> "#(person.gender)"</span></li>
+                        #if(person.gender == 0):
+                            <li class="key">"gender": Unknown </li>
+                        #elseif(person.gender == 1):
+                            <li class="key">"gender": Male </li>
+                        #elseif(person.gender == 2):
+                            <li class="key">"gender": Female </li>
+                        #elseif(person.gender == 3):
+                            <li class="key">"gender": Other </li>
+                        #else:
+                            <li class="key">"gender": Not Available </li>
+                        #endif
                         <li class="key">"role": <span class="value"> "#(person.role)"</span></li>
                         <li class="key">"team": <span class="value"> "#(person.team)"</span></li>
                         <li class="key">"languages": <span class="value"> #(person.languages)</span></li>
                         <li class="key">"hobbies": <span class="value"> #(person.hobbies)</span></li>
+                        <li class="key">"movie": <span class="value"> #(person.movie)</span></li>
                         <li class="key">"department": <span class="value"> "#(person.department)"</span></li>
                         <li class="key">"email": <span class="value"> "#(person.email)"</span></li>
                     </div>

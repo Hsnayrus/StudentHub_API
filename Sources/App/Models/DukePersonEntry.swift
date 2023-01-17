@@ -27,7 +27,7 @@ final class DukePersonEntry: Model, Content{
     var wherefrom: String
     
     @Field(key: "gender")
-    var gender: String
+    var gender: Int
     
     @Field(key: "role")
     var role: String
@@ -39,7 +39,7 @@ final class DukePersonEntry: Model, Content{
     var team: String
     
     @Field(key: "hobbies")
-    var hobbies: [String]
+    var hobbies: String
     
     @Field(key: "languages")
     var languages: [String]
@@ -53,10 +53,13 @@ final class DukePersonEntry: Model, Content{
     @Field(key: "picture")
     var picture: String
     
+    @Field(key: "movie")
+    var movie: String
+    
     init(){
     }
     
-    init(id: String? = nil, netid: String, firstname: String, lastname: String, wherefrom: String, gender: String, role: String, degree: String, team: String, hobbies: [String], languages: [String], department: String, email: String, picture: String){
+    init(id: String? = nil, netid: String, firstname: String, lastname: String, wherefrom: String, gender: Int, role: String, degree: String, team: String, hobbies: String, languages: [String], department: String, email: String, picture: String, movie:String){
         self.id = id
         self.firstname = firstname
         self.lastname = lastname

@@ -15,6 +15,7 @@
         <p>Department: <input type="text" name="department"></p>
         <p>Email: <input type="text" name="email"></p>
         <p>Picture: <input type="text" name="picture"></p>
+        <p>Movie: <input type="text" name="movie"></p>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </body>

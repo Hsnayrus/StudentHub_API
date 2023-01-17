@@ -23,15 +23,16 @@ struct DukePersonEntryMigrations: AsyncMigration{
             .field("firstname", .string, .required)
             .field("lastname" ,.string, .required)
             .field("wherefrom", .string)
-            .field("gender", .string, .required)
+            .field("gender", .int, .required)
             .field("role", .string)
             .field("degree", .string)
             .field("team", .string)
-            .field("hobbies", .array(of: .string))
+            .field("hobbies", .string)
             .field("languages", .array(of: .string))
             .field("department", .string)
             .field("email", .string)
             .field("picture", .string)
+            .field("movie", .string)
             .create()
     }
     
