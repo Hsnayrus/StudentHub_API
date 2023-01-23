@@ -104,7 +104,6 @@
                         <li class="key">"firstname": <span class="value"> "#(person.firstname)"</span></li>
                         <li class="key">"lastname": <span class="value"> "#(person.lastname)"</span></li>
                         <li class="key">"netid": <span class="value"> "#(person.netid)"</span></li>
-                        <li class="key">"id": <span class="value"> "#(person.id)"</span></li>
                         <li class="key">"wherefrom": <span class="value"> "#(person.wherefrom)"</span></li>
                         <li class="key">"degree": <span class="value"> "#(person.degree)"</span></li>
                         #if(person.gender == 0):
@@ -121,9 +120,8 @@
                         <li class="key">"role": <span class="value"> "#(person.role)"</span></li>
                         <li class="key">"team": <span class="value"> "#(person.team)"</span></li>
                         <li class="key">"languages": <span class="value"> #(person.languages)</span></li>
-                        <li class="key">"hobbies": <span class="value"> #(person.hobbies)</span></li>
                         <li class="key">"movie": <span class="value"> #(person.movie)</span></li>
-                        <li class="key">"department": <span class="value"> "#(person.department)"</span></li>
+                        <li class="key">"hobby": <span class="value"> #(person.hobby)</span></li>
                         <li class="key">"email": <span class="value"> "#(person.email)"</span></li>
                     </div>
                 </div>

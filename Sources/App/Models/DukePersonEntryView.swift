@@ -18,9 +18,8 @@ struct DukePersonEntryView: Encodable{
     var role: String
     var degree: String
     var team: String
-    var hobbies: String
+    var hobby: String
     var languages: [String]
-    var department: String
     var email: String
     var picture: String
     var color: String
@@ -36,9 +35,8 @@ struct DukePersonEntryView: Encodable{
         self.role = dukePerson.role
         self.degree = dukePerson.degree
         self.team = dukePerson.team
-        self.hobbies = dukePerson.hobbies
+        self.hobby = dukePerson.hobby
         self.languages = dukePerson.languages
-        self.department = dukePerson.department
         self.email = dukePerson.email
         self.picture = dukePerson.picture
         self.movie = dukePerson.movie

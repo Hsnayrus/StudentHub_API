@@ -183,9 +183,9 @@ struct DukePersonEntryController: RouteCollection{
         entry.role       = newDetails.role
         entry.degree     = newDetails.degree
         entry.team       = newDetails.team
-        entry.hobbies    = newDetails.hobbies
+        entry.hobby      = newDetails.hobby
+        entry.movie      = newDetails.movie
         entry.languages  = newDetails.languages
-        entry.department = newDetails.department
         entry.email      = newDetails.email
         entry.picture    = newDetails.picture
         try await entry.update(on: req.db)

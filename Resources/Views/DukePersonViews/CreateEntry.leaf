@@ -10,9 +10,7 @@
         <p>Degree: <input type="text" name="degree"></p>
         <p>Role: <input type="text" name="role"></p>
         <p>Team: <input type="text" name="team"></p>
-        <p>Hobbies: <input type="text" name="hobbies"></p>
-        <p>Languages: <input type="text" name="languages"></p>
-        <p>Department: <input type="text" name="department"></p>
+        <p>Hobby: <input type="text" name="hobby"></p>
         <p>Email: <input type="text" name="email"></p>
         <p>Picture: <input type="text" name="picture"></p>
         <p>Movie: <input type="text" name="movie"></p>
