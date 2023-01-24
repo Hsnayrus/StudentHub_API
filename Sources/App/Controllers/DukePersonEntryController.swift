@@ -181,7 +181,6 @@ struct DukePersonEntryController: RouteCollection{
         entry.wherefrom  = newDetails.wherefrom
         entry.gender     = newDetails.gender
         entry.role       = newDetails.role
-        entry.degree     = newDetails.degree
         entry.team       = newDetails.team
         entry.hobby      = newDetails.hobby
         entry.movie      = newDetails.movie

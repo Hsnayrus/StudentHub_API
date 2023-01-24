@@ -16,7 +16,6 @@ struct DukePersonEntryView: Encodable{
     var wherefrom: String
     var gender: Int
     var role: String
-    var degree: String
     var team: String
     var hobby: String
     var languages: [String]
@@ -33,7 +32,6 @@ struct DukePersonEntryView: Encodable{
         self.wherefrom = dukePerson.wherefrom
         self.gender = dukePerson.gender
         self.role = dukePerson.role
-        self.degree = dukePerson.degree
         self.team = dukePerson.team
         self.hobby = dukePerson.hobby
         self.languages = dukePerson.languages

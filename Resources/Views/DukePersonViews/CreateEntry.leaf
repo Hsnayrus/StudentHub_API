@@ -7,7 +7,6 @@
         <p>NetID: <input type="text" name="netid"></p>
         <p>Place of Origin: <input type="text" name="wherefrom"></p>
         <p>Gender: <input type="text" name="gender"></p>
-        <p>Degree: <input type="text" name="degree"></p>
         <p>Role: <input type="text" name="role"></p>
         <p>Team: <input type="text" name="team"></p>
         <p>Hobby: <input type="text" name="hobby"></p>

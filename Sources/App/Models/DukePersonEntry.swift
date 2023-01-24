@@ -32,9 +32,6 @@ final class DukePersonEntry: Model, Content{
     @Field(key: "role")
     var role: String
     
-    @Field(key: "degree")
-    var degree: String
-    
     @Field(key: "team")
     var team: String
     
@@ -56,14 +53,13 @@ final class DukePersonEntry: Model, Content{
     init(){
     }
     
-    init(id: String? = nil, netid: String, firstname: String, lastname: String, wherefrom: String, gender: Int, role: String, degree: String, team: String, hobby: String, languages: [String], email: String, picture: String, movie:String){
+    init(id: String? = nil, netid: String, firstname: String, lastname: String, wherefrom: String, gender: Int, role: String, team: String, hobby: String, languages: [String], email: String, picture: String, movie:String){
         self.id = id
         self.firstname = firstname
         self.lastname = lastname
         self.wherefrom = wherefrom
         self.gender = gender
         self.role = role
-        self.degree = degree
         self.team = team
         self.hobby = hobby
         self.languages = languages

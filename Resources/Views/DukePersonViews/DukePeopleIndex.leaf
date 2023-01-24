@@ -105,7 +105,6 @@
                         <li class="key">"lastname": <span class="value"> "#(person.lastname)"</span></li>
                         <li class="key">"netid": <span class="value"> "#(person.netid)"</span></li>
                         <li class="key">"wherefrom": <span class="value"> "#(person.wherefrom)"</span></li>
-                        <li class="key">"degree": <span class="value"> "#(person.degree)"</span></li>
                         #if(person.gender == 0):
                             <li class="key">"gender": Unknown </li>
                         #elseif(person.gender == 1):

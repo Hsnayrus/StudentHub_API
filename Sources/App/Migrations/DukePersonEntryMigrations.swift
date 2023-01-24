@@ -25,7 +25,6 @@ struct DukePersonEntryMigrations: AsyncMigration{
             .field("wherefrom", .string)
             .field("gender", .int, .required)
             .field("role", .string)
-            .field("degree", .string)
             .field("team", .string)
             .field("hobby", .string)
             .field("languages", .array(of: .string))

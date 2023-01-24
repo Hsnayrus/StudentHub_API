@@ -34,11 +34,9 @@
         var wherefrom: String
         var gender: String
         var role: String
-        var degree: String
         var team: String
-        var hobbies: [String]
+        var hobby: String
         var languages: [String]
-        var department: String
         var email: String
         var picture: String     
     }
@@ -110,7 +108,6 @@ All the following routes require a basicAuthorization HTTP header, where a valid
             "wherefrom": "Earth",
             "gender": "Male",
             "role": "Student",
-            "degree": "MS",
             "team": "Duke",
             "hobbies": ["Coding"],
             "languages": ["C++", "Swift"],
@@ -148,7 +145,6 @@ All the following routes require a basicAuthorization HTTP header, where a valid
             "wherefrom": "Earth",
             "gender": "Male",
             "role": "Student",
-            "degree": "MS",
             "team": "Duke",
             "hobbies": ["Coding", "Hiking"],
             "languages": ["C++", "Swift"],
